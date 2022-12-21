@@ -1,10 +1,19 @@
 import { useContext } from "react";
 import { AppContext } from "../../contexts/AppContext";
+import { ModalContext } from "../../contexts/ModalContext";
 import Text from "../generic/Text";
 
 const TodoListContent = props => {
-	const { todolists, deleteTodo, updateStatusTodo, currentList, isFiltered } =
-		useContext(AppContext);
+	const {
+		todolists,
+		deleteTodo,
+		updateStatusTodo,
+		currentList,
+		isFiltered,
+		setCurrentTodo,
+	} = useContext(AppContext);
+
+	const { toggleEditTodoModal } = useContext(ModalContext);
 
 	const todolist = todolists.filter(({ id }) => id === currentList)[0];
 
@@ -32,7 +41,15 @@ const TodoListContent = props => {
 								onChange={() => updateStatusTodo(todolist.id)(todo.id)}
 							/>
 
-							<p class="cursor-pointer">{todo.label}</p>
+							<p
+								class="cursor-pointer"
+								onClick={() => {
+									setCurrentTodo(todo.id);
+									toggleEditTodoModal();
+								}}
+							>
+								{todo.label}
+							</p>
 						</div>
 
 						<button

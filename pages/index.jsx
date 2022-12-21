@@ -2,6 +2,7 @@ import { useContext } from "react";
 import AddListForm from "../components/business/AddListForm";
 import AddTodoForm from "../components/business/AddTodoForm";
 import EditListForm from "../components/business/EditListForm";
+import EditTodoForm from "../components/business/EditTodoForm";
 import Nav from "../components/business/Nav";
 import OptionsBar from "../components/business/OptionsBar";
 import TodoListContent from "../components/business/TodolistContent";
@@ -30,6 +31,12 @@ const Home = () => {
 			{modalOpen === "add-todo" && (
 				<Modal title="Add a new todo" submitLabel="Add" submitForm="add-todo">
 					{toggleModal => <AddTodoForm toggleModal={toggleModal} />}
+				</Modal>
+			)}
+
+			{modalOpen === "edit-todo" && (
+				<Modal title="Edit a todo" submitLabel="Add" submitForm="add-todo">
+					{toggleModal => <EditTodoForm toggleModal={toggleModal} />}
 				</Modal>
 			)}
 			<Nav />

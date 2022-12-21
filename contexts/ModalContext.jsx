@@ -20,6 +20,10 @@ export const ModalContextProvider = props => {
 		setModalOpen("edit-list");
 	}, []);
 
+	const toggleEditTodoModal = useCallback(() => {
+		setModalOpen("edit-todo");
+	}, []);
+
 	return (
 		<ModalContext.Provider
 			value={{
@@ -28,6 +32,7 @@ export const ModalContextProvider = props => {
 				toggleAddListModal,
 				toggleEditListModal,
 				toggleAddTodoModal,
+				toggleEditTodoModal,
 			}}
 		>
 			{children}

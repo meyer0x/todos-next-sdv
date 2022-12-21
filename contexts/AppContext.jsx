@@ -5,6 +5,7 @@ export const AppContextProvider = props => {
 	const { children } = props;
 
 	const [currentList, setCurrentList] = useState(0);
+	const [currentTodo, setCurrentTodo] = useState(0);
 	const [isFiltered, setIsFiltered] = useState(0);
 	const [todolists, setTodolists] = useState(initialTodolists);
 
@@ -42,6 +43,30 @@ export const AppContextProvider = props => {
 			]);
 		},
 		[currentList],
+	);
+
+	const editTodo = useCallback(
+		name => {
+			setTodolists(prev => [
+				...prev.map(todolist => {
+					if (todolist.id === currentList) {
+						return {
+							...todolist,
+							todos: [
+								...todolist.todos.map(todo => {
+									if (todo.id === currentTodo) {
+										return { ...todo, label: name };
+									}
+									return todo;
+								}),
+							],
+						};
+					}
+					return todolist;
+				}),
+			]);
+		},
+		[currentList, currentTodo],
 	);
 
 	const updateStatusTodo = useCallback(
@@ -122,6 +147,7 @@ export const AppContextProvider = props => {
 				todolists,
 				currentList,
 				isFiltered,
+				currentTodo,
 				toggleFiltered,
 				deleteList,
 				addTodolist,
@@ -130,6 +156,8 @@ export const AppContextProvider = props => {
 				addTodo,
 				updateStatusTodo,
 				setCurrentList,
+				setCurrentTodo,
+				editTodo,
 			}}
 		>
 			{children}

@@ -16,14 +16,13 @@ const Nav = props => {
 	return (
 		<nav className="flex flex-row items-center overflow-x-scroll">
 			{todolists.map(todolist => (
-				<div className="flex flex-col" key={todolist.id}>
-					<Button
-						variant="todo"
-						className={clsx("whitespace-nowrap -ml-2", {
-							"z-20": currentList === todolist.id,
-						})}
-						onClick={() => setCurrentList(todolist.id)}
-					>
+				<div
+					className={clsx("whitespace-nowrap z-0 relative -ml-2", {
+						"z-20": currentList === todolist.id,
+					})}
+					key={todolist.id}
+				>
+					<Button variant="todo" onClick={() => setCurrentList(todolist.id)}>
 						{todolist.label}
 						<div className="flex flex-row">
 							<span className="bg-green-400 px-2 rounded -mr-2 z-20">
@@ -34,12 +33,14 @@ const Nav = props => {
 							</span>
 						</div>
 					</Button>
-					<div class="w-full bg-gray-200 border h-1.5">
-						<div
-							class="bg-green-400 h-1.5 z-20 transition-all duration-300 ease-linear"
-							style={{ width: `${getPercentage(todolist.todos) || 0}% ` }}
-						></div>
-					</div>
+					{currentList === todolist.id && (
+						<div class="w-full bg-gray-200 border h-1.5 absolute bottom-0 ">
+							<div
+								class="bg-green-400 h-1.5 z-20 transition-all duration-300 ease-linear"
+								style={{ width: `${getPercentage(todolist.todos) || 0}% ` }}
+							/>
+						</div>
+					)}
 				</div>
 			))}
 			<Button className="ml-10" variant="todo" onClick={toggleAddListModal}>
