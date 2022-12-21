@@ -1,7 +1,15 @@
-import '../styles/globals.css'
+import { AppContextProvider } from "../contexts/AppContext";
+import { ModalContextProvider } from "../contexts/ModalContext";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+	return (
+		<ModalContextProvider>
+			<AppContextProvider>
+				<Component {...pageProps} />
+			</AppContextProvider>
+		</ModalContextProvider>
+	);
 }
 
-export default MyApp
+export default MyApp;
