@@ -35,7 +35,7 @@ const Home = () => {
 			)}
 
 			{modalOpen === "edit-todo" && (
-				<Modal title="Edit a todo" submitLabel="Add" submitForm="add-todo">
+				<Modal title="Edit a todo" submitLabel="Edit" submitForm="edit-todo">
 					{toggleModal => <EditTodoForm toggleModal={toggleModal} />}
 				</Modal>
 			)}
